@@ -49,6 +49,8 @@ namespace Coverlet.MSbuild.Tasks
 
         public bool InstrumentModulesWithoutLocalSources { get; set; }
 
+        public string StrongNameKey { get; set; }
+
         [Output]
         public ITaskItem InstrumenterState { get; set; }
 
@@ -102,7 +104,8 @@ namespace Coverlet.MSbuild.Tasks
                     SkipAutoProps = SkipAutoProps,
                     DeterministicReport = DeterministicReport,
                     InstrumentModulesWithoutLocalSources = InstrumentModulesWithoutLocalSources,
-                    DoesNotReturnAttributes = DoesNotReturnAttribute?.Split(',')
+                    DoesNotReturnAttributes = DoesNotReturnAttribute?.Split(','),
+                    StrongNameKey = StrongNameKey
                 };
 
                 var coverage = new Coverage(Path,

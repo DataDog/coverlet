@@ -86,6 +86,11 @@ namespace Coverlet.Collector.DataCollection
         /// </summary>
         public bool InstrumentModulesWithoutLocalSources { get;  set; }
 
+        /// <summary>
+        /// The path to the key used for signing assemblies
+        /// </summary>
+        public string StrongNameKey { get; set; }
+
         public override string ToString()
         {
             var builder = new StringBuilder();
@@ -104,6 +109,7 @@ namespace Coverlet.Collector.DataCollection
             builder.AppendFormat("DoesNotReturnAttributes: '{0}'", string.Join(",", DoesNotReturnAttributes ?? Enumerable.Empty<string>()));
             builder.AppendFormat("DeterministicReport: '{0}'", DeterministicReport);
             builder.AppendFormat("InstrumentModulesWithoutLocalSources: '{0}'", InstrumentModulesWithoutLocalSources);
+            builder.AppendFormat("StrongNameKey: '{0}'", StrongNameKey);
 
             return builder.ToString();
         }

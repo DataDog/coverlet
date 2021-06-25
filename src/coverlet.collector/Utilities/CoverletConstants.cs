@@ -27,5 +27,6 @@ namespace Coverlet.Collector.Utilities
         public const string DoesNotReturnAttributesElementName = "DoesNotReturnAttribute";
         public const string DeterministicReport = "DeterministicReport";
         public const string InstrumentModulesWithoutLocalSources = "InstrumentModulesWithoutLocalSources";
+        public const string StrongNameKey = "StrongNameKey";
     }
 }
