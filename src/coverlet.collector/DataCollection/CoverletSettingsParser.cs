@@ -45,6 +45,7 @@ namespace Coverlet.Collector.DataCollection
                 coverletSettings.SkipAutoProps = ParseSkipAutoProps(configurationElement);
                 coverletSettings.DoesNotReturnAttributes = ParseDoesNotReturnAttributes(configurationElement);
                 coverletSettings.DeterministicReport = ParseDeterministicReport(configurationElement);
+                coverletSettings.StrongNameKey = ParseStrongNameKey(configurationElement);
             }
 
             coverletSettings.ReportFormats = ParseReportFormats(configurationElement);
@@ -206,6 +207,17 @@ namespace Coverlet.Collector.DataCollection
             XmlElement deterministicReportElement = configurationElement[CoverletConstants.DeterministicReport];
             bool.TryParse(deterministicReportElement?.InnerText, out bool deterministicReport);
             return deterministicReport;
+        }
+
+        /// <summary>
+        /// Parse the path to the strong-name key
+        /// </summary>
+        /// <param name="configurationElement">Configuration element</param>
+        /// <returns>The path to the strong-name key</returns>
+        private string ParseStrongNameKey(XmlElement configurationElement)
+        {
+            XmlElement strongNameKeyElement = configurationElement[CoverletConstants.StrongNameKey];
+            return strongNameKeyElement?.InnerText;
         }
 
         /// <summary>

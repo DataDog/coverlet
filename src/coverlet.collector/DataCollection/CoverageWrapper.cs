@@ -30,7 +30,8 @@ namespace Coverlet.Collector.DataCollection
                 UseSourceLink = settings.UseSourceLink,
                 SkipAutoProps = settings.SkipAutoProps,
                 DoesNotReturnAttributes = settings.DoesNotReturnAttributes,
-                DeterministicReport = settings.DeterministicReport
+                DeterministicReport = settings.DeterministicReport,
+                StrongNameKey = settings.StrongNameKey 
             };
 
             return new Coverage(

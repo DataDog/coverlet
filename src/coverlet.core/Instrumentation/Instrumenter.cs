@@ -303,7 +303,14 @@ namespace Coverlet.Core.Instrumentation
                         onProcessExitIl.InsertBefore(lastInstr, Instruction.Create(OpCodes.Call, customTrackerUnloadModule));
                     }
 
-                    module.Write(stream, new WriterParameters { WriteSymbols = true });
+                    var writerParameters = new WriterParameters { WriteSymbols = true };
+
+                    if (module.Attributes.HasFlag(ModuleAttributes.StrongNameSigned) && !string.IsNullOrEmpty(_parameters.StrongNameKey))
+                    {
+                        writerParameters.StrongNameKeyBlob = File.ReadAllBytes(_parameters.StrongNameKey);
+                    }
+
+                    module.Write(stream, writerParameters);
                 }
             }
         }

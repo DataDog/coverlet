@@ -44,6 +44,8 @@ namespace Coverlet.MSbuild.Tasks
 
         public bool DeterministicReport { get; set; }
 
+        public string StrongNameKey { get; set; }
+
         [Output]
         public ITaskItem InstrumenterState { get; set; }
 
@@ -96,7 +98,8 @@ namespace Coverlet.MSbuild.Tasks
                     UseSourceLink = UseSourceLink,
                     SkipAutoProps = SkipAutoProps,
                     DeterministicReport = DeterministicReport,
-                    DoesNotReturnAttributes = DoesNotReturnAttribute?.Split(',')
+                    DoesNotReturnAttributes = DoesNotReturnAttribute?.Split(','),
+                    StrongNameKey = StrongNameKey
                 };
 
                 Coverage coverage = new Coverage(Path,
