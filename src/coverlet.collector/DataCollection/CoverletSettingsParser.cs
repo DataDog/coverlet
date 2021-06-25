@@ -49,6 +49,7 @@ namespace Coverlet.Collector.DataCollection
                 coverletSettings.DoesNotReturnAttributes = ParseDoesNotReturnAttributes(configurationElement);
                 coverletSettings.DeterministicReport = ParseDeterministicReport(configurationElement);
                 coverletSettings.ExcludeAssembliesWithoutSources = ParseExcludeAssembliesWithoutSources(configurationElement);
+                coverletSettings.StrongNameKey = ParseStrongNameKey(configurationElement);
             }
 
             coverletSettings.ReportFormats = ParseReportFormats(configurationElement);
@@ -221,6 +222,17 @@ namespace Coverlet.Collector.DataCollection
         {
             XmlElement instrumentModulesWithoutLocalSourcesElement = configurationElement[CoverletConstants.ExcludeAssembliesWithoutSources];
             return instrumentModulesWithoutLocalSourcesElement?.InnerText;
+        }
+
+        /// <summary>
+        /// Parse the path to the strong-name key
+        /// </summary>
+        /// <param name="configurationElement">Configuration element</param>
+        /// <returns>The path to the strong-name key</returns>
+        private string ParseStrongNameKey(XmlElement configurationElement)
+        {
+            XmlElement strongNameKeyElement = configurationElement[CoverletConstants.StrongNameKey];
+            return strongNameKeyElement?.InnerText;
         }
 
         /// <summary>

@@ -330,7 +330,13 @@ namespace Coverlet.Core.Instrumentation
                 onProcessExitMethod.Body.ExceptionHandlers.Add(handler);
             }
 
-            module.Write(stream, new WriterParameters { WriteSymbols = true });
+            var writerParameters = new WriterParameters { WriteSymbols = true };
+            if (module.Attributes.HasFlag(ModuleAttributes.StrongNameSigned) && !string.IsNullOrEmpty(_parameters.StrongNameKey))
+            {
+                writerParameters.StrongNameKeyBlob = File.ReadAllBytes(_parameters.StrongNameKey);
+            }
+
+            module.Write(stream, writerParameters);
         }
 
         private void AddCustomModuleTrackerToModule(ModuleDefinition module)

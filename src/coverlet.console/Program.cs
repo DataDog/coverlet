@@ -71,6 +71,7 @@ namespace Coverlet.Console
             CommandOption useSourceLink = app.Option("--use-source-link", "Specifies whether to use SourceLink URIs in place of file system paths.", CommandOptionType.NoValue);
             CommandOption doesNotReturnAttributes = app.Option("--does-not-return-attribute", "Attributes that mark methods that do not return.", CommandOptionType.MultipleValue);
             CommandOption excludeAssembliesWithoutSources = app.Option("--exclude-assemblies-without-sources", "Specifies behaviour of heuristic to ignore assemblies with missing source documents.", CommandOptionType.SingleValue);
+            CommandOption strongNameKey = app.Option("--strong-name-key", "Path to the key used to sign assemblies.", CommandOptionType.SingleOrNoValue);
 
             app.OnExecute(() =>
             {
@@ -99,7 +100,8 @@ namespace Coverlet.Console
                     UseSourceLink = useSourceLink.HasValue(),
                     SkipAutoProps = skipAutoProp.HasValue(),
                     DoesNotReturnAttributes = doesNotReturnAttributes.Values.ToArray(),
-                    ExcludeAssembliesWithoutSources = excludeAssembliesWithoutSources.Value()
+                    ExcludeAssembliesWithoutSources = excludeAssembliesWithoutSources.Value(),
+                    StrongNameKey = strongNameKey.Value()
                 };
 
                 ISourceRootTranslator sourceRootTranslator = serviceProvider.GetRequiredService<ISourceRootTranslator>();
